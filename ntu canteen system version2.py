@@ -1,4 +1,10 @@
 import tkinter as tk
+import datetime
+today = datetime.datetime.now()
+now = str(today)
+hour = int(now[11:13])
+minute = int(now[14:16])
+sec = int(now[17:19])
 
 class NTUsystem(tk.Tk):
     def __init__(self):
@@ -77,8 +83,14 @@ class mc(tk.Frame):
         tk.Label(self, text="McDonald's", font=('Helvetica', 18, "bold")).pack(side="top", fill="x", pady=5)
         with open('menu information.txt') as menu:
             for i,line in enumerate(menu.readlines()):
-                if i>=15 and i<=27:
-                    menuminiwok = tk.Message(self, text=line, font=('Helvetica', 10),width=10000).pack(side="top")
+                if hour>=7 and hour<11:
+                    if i>=16 and i<=20:
+                        menuminiwok = tk.Message(self, text=line, font=('Helvetica', 10),width=10000).pack(side="top")
+                elif hour>=11 and hour<24:
+                    if i>=23 and i<=27:
+                        menuminiwok = tk.Message(self, text=line, font=('Helvetica', 10),width=10000).pack(side="top")
+            if hour<7 and hour>=0:
+                tk.Label(self, text="McDonald's is closed now.", font=('Helvetica', 18)).pack()
         tk.Button(self, text="Return to Home Page",
                   command=lambda: master.switch_frame(HomePage)).pack(side=tk.BOTTOM)
 
@@ -126,7 +138,7 @@ class OperT(tk.Frame):
         with open('operating time.txt') as time:
             for line in time.readlines():
                     operatinghour = tk.Message(self, text=line, font=('Helvetica', 10),width=10000).pack(side="top")
-                    mylist.insert(tk.ACTIVE, operatinghour)
+                    mylist.insert(tk.END, operatinghour)
         mylist.pack(fill='both')
         scrollbar.config(command = mylist.yview)
         tk.Button(self, text="Return to Home Page",
