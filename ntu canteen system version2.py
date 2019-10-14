@@ -27,10 +27,6 @@ class HomePage(tk.Frame):
         tk.Label(self, text="Real Time NTU Canteen System", font=('Helvetica', 20, "bold")).pack(side="top", fill="x", pady=5)
         tk.Button(self, text="View Stalls", width = 40,
                   command=lambda: master.switch_frame(ViewS)).pack()
-        tk.Button(self, text="Calculate the estimated waiting time", width = 40,
-                  command=lambda: master.switch_frame(WaitT)).pack()
-        tk.Button(self, text="View operating hours", width = 40,
-                  command=lambda: master.switch_frame(OperT)).pack()
         tk.Button(self, text="Set date and time", width = 40,
                   command=lambda: master.switch_frame(dateT)).pack()
         tk.Button(self, text="Exit", width = 40, command=self.destroy).pack()
@@ -46,10 +42,6 @@ class ViewS(tk.Frame):
                   command=lambda: master.switch_frame(chicken)).pack()
         tk.Button(self, text="McDonald's", width = 40,
                   command=lambda: master.switch_frame(mc)).pack()
-        tk.Button(self, text="Subway", width = 40,
-                  command=lambda: master.switch_frame(subway)).pack()
-        tk.Button(self, text="The Sandwich Guys", width = 40,
-                  command=lambda: master.switch_frame(sandwich)).pack()
         tk.Button(self, text="Return to Home Page", width = 40,
                   command=lambda: master.switch_frame(HomePage)).pack()
 
@@ -75,8 +67,12 @@ class miniwok(tk.Frame):
                         for i,line in enumerate(menu.readlines()):
                             if i>=1 and i<=5:
                                 menuminiwok = tk.Message(self, text=line, font=('Helvetica', 10),width=10000).pack(side="top")
-        tk.Button(self, text="Return to Home Page",
-                  command=lambda: master.switch_frame(HomePage)).pack(side=tk.BOTTOM)
+        tk.Button(self, text="Calculate the estimated waiting time", width = 40,
+                  command=lambda: master.switch_frame(WaitT)).pack()
+        tk.Button(self, text="View operating hours", width = 40,
+                  command=lambda: master.switch_frame(Oper1)).pack()
+        tk.Button(self, text="Return", width = 40,
+                  command=lambda: master.switch_frame(ViewS)).pack(side=tk.BOTTOM)
 
 class chicken(tk.Frame):
     def __init__(self, master):
@@ -100,8 +96,12 @@ class chicken(tk.Frame):
                         for i,line in enumerate(menu.readlines()):
                             if i>=1 and i<=5:
                                 menuchicken = tk.Message(self, text=line, font=('Helvetica', 10),width=10000).pack(side="top")
-        tk.Button(self, text="Return to Home Page",
-                 command=lambda: master.switch_frame(HomePage)).pack(side=tk.BOTTOM)
+        tk.Button(self, text="Calculate the estimated waiting time", width = 40,
+                  command=lambda: master.switch_frame(WaitT)).pack()
+        tk.Button(self, text="View operating hours", width = 40,
+                  command=lambda: master.switch_frame(Oper2)).pack()
+        tk.Button(self, text="Return", width = 40,
+                 command=lambda: master.switch_frame(ViewS)).pack(side=tk.BOTTOM)
 
 
 class mc(tk.Frame):
@@ -130,81 +130,66 @@ class mc(tk.Frame):
                             menumc = tk.Message(self, text=line, font=('Helvetica', 10),width=10000).pack(side="top")
                     else:
                         tk.Label(self, text="McDonald's is closed now.", font=('Helvetica', 18)).pack()
-        tk.Button(self, text="Return to Home Page",
-                  command=lambda: master.switch_frame(HomePage)).pack(side=tk.BOTTOM)
-
-class subway(tk.Frame):
-    def __init__(self, master):
-        tk.Frame.__init__(self, master)
-        tk.Frame.configure(self)
-        tk.Label(self, text="Subway", font=('Helvetica', 18, "bold")).pack(side="top", fill="x", pady=5)
-        with open('menu information.txt') as menu:
-                if day == 'Sunday' or 'Saturaday':
-                    if time1<1100 and time1>1800:
-                        tk.Label(self, text="The stall is closed now.", font=('Helvetica', 18, "bold")).pack(side="top")
-                    else:
-                        for i,line in enumerate(menu.readlines()):
-                            if i>=30 and i<=33:
-                                menusub = tk.Message(self, text=line, font=('Helvetica', 10),width=10000).pack(side="top")
-                else:
-                    if time1<800 and time1>2100:
-                        tk.Label(self, text="The stall is closed now.", font=('Helvetica', 18, "bold")).pack(side="top")
-                    else:
-                        for i,line in enumerate(menu.readlines()):
-                            if i>=30 and i<=33:
-                                menusub = tk.Message(self, text=line, font=('Helvetica', 10),width=10000).pack(side="top")
-        tk.Button(self, text="Return to Home Page",
-                  command=lambda: master.switch_frame(HomePage)).pack(side=tk.BOTTOM)
-
-class sandwich(tk.Frame):
-    def __init__(self, master):
-        tk.Frame.__init__(self, master)
-        tk.Frame.configure(self)
-        tk.Label(self, text="The Sandwich Guys", font=('Helvetica', 18, "bold")).pack(side="top", fill="x", pady=5)
-        with open('menu information.txt') as menu:
-            if time1<830 and time1>1730:
-                tk.Label(self, text="The stall is closed now.", font=('Helvetica', 18, "bold")).pack(side="top")
-            else:
-                for i,line in enumerate(menu.readlines()):
-                    if i>=36 and i<=37:
-                        menusandwich = tk.Message(self, text=line, font=('Helvetica', 10),width=10000).pack(side="top")
-        tk.Button(self, text="Return to Home Page",
-                  command=lambda: master.switch_frame(HomePage)).pack(side=tk.BOTTOM)
-
+        tk.Button(self, text="Calculate the estimated waiting time", width = 40,
+                  command=lambda: master.switch_frame(WaitT)).pack()
+        tk.Button(self, text="View operating hours", width = 40,
+                  command=lambda: master.switch_frame(Oper3)).pack()
+        tk.Button(self, text="Return", width = 40,
+                  command=lambda: master.switch_frame(ViewS)).pack(side=tk.BOTTOM)
 
 class WaitT(tk.Frame):
     def __init__(self, master):
         tk.Frame.__init__(self, master)
         tk.Frame.configure(self,bg='red')
         tk.Label(self, text="Calculation of estimated waiting time", font=('Helvetica', 18, "bold")).pack(side="top", fill="x", pady=5)
-        tk.Button(self, text="Return to Home Page",
-                  command=lambda: master.switch_frame(HomePage)).pack()
+        tk.Button(self, text="Return", width = 40,
+                  command=lambda: master.switch_frame(ViewS)).pack()
 
-class OperT(tk.Frame):
+class Oper1(tk.Frame):
     def __init__(self, master):
         tk.Frame.__init__(self, master)
         tk.Frame.configure(self)
         tk.Label(self, text="View the operating hours", font=('Helvetica', 18, "bold")).pack(side="top")
-        scrollbar=tk.Scrollbar(self)
-        scrollbar.pack(side = tk.RIGHT, fill = 'y')
-        mylist = tk.Listbox(self, yscrollcommand = scrollbar.set)
-        operating = "operating time.txt"
-        file2 = open(operating,'r')
-        for line in file2:
-            lines = line
-            mylist.insert(tk.END, lines)
-        mylist.pack(fill='both')
-        scrollbar.config(command = mylist.yview)
-        tk.Button(self, text="Return to Home Page",
-                  command=lambda: master.switch_frame(HomePage)).pack()
+        with open('operating time.txt') as oper:
+            for i,line in enumerate(oper.readlines()):
+                if i>=1 and i<=6:
+                    mini = tk.Message(self, text=line, font=('Helvetica', 10),width=10000).pack(side="top")
+        tk.Button(self, text="Return", width = 40,
+                  command=lambda: master.switch_frame(miniwok)).pack()
+#operating hours for mini wok
 
+class Oper2(tk.Frame):
+    def __init__(self, master):
+        tk.Frame.__init__(self, master)
+        tk.Frame.configure(self)
+        tk.Label(self, text="View the operating hours", font=('Helvetica', 18, "bold")).pack(side="top")
+        with open('operating time.txt') as oper:
+            for i,line in enumerate(oper.readlines()):
+                if i>=9 and i<=14:
+                    chick = tk.Message(self, text=line, font=('Helvetica', 10),width=10000).pack(side="top")
+        tk.Button(self, text="Return", width = 40,
+                  command=lambda: master.switch_frame(chicken)).pack()
+#operating hours for chicken rice
+
+class Oper3(tk.Frame):
+    def __init__(self, master):
+        tk.Frame.__init__(self, master)
+        tk.Frame.configure(self)
+        tk.Label(self, text="View the operating hours", font=('Helvetica', 18, "bold")).pack(side="top")
+        with open('operating time.txt') as oper:
+            for i,line in enumerate(oper.readlines()):
+                if i>=17 and i<=22:
+                    mc = tk.Message(self, text=line, font=('Helvetica', 10),width=10000).pack(side="top")
+        tk.Button(self, text="Return", width = 40,
+                  command=lambda: master.switch_frame(mc)).pack()
+#operating hours for mcdonald
 
 class dateT(tk.Frame):
     def __init__(self, master):
         tk.Frame.__init__(self, master)
         tk.Frame.configure(self,bg='red')
         tk.Label(self, text="Set system date and time", font=('Helvetica', 18, "bold")).pack(side="top", fill="x", pady=5)
-        tk.Button(self, text="Return to Home Page",
+        tk.Button(self, text="Return to Home Page", width = 40,
                   command=lambda: master.switch_frame(HomePage)).pack()
 
 
